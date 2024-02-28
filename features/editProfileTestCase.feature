@@ -5,7 +5,7 @@ Feature: Edit user profile on James app
     Then I tap on main menu button
     When I tap on the tile with users names
     Then I am taken to the Profile screen
-    And I change users first name to "WhatsUp"
+    And I change users first name to "NewName22"
     Then I tap Done button
     Then Success toast message is displayed
-    And Account screen shows new name "WhatsUp" on user profile tile
+    And Account screen shows new name "NewName22" on user profile tile

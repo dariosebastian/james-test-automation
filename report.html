@@ -1,0 +1,88 @@
+Feature: Login Feature # features/loginTestCase.feature:1
+
+  Scenario: Failed login by entering wrong code    # features/loginTestCase.feature:3
+    Given James app is running                     # features/steps/LoginFailTestSteps.py:12
+    When I enter a fake phone number "3022065094"  # features/steps/LoginFailTestSteps.py:18
+    And I tap "Continue" button on phone screen    # features/steps/LoginFailTestSteps.py:24
+    Then I enter the invalid pin "111111"          # features/steps/LoginFailTestSteps.py:30
+    When I tap "Continue" on pin validation screen # features/steps/LoginFailTestSteps.py:36
+    Then Login fails due to invalid credentials    # features/steps/LoginFailTestSteps.py:42
+
+  Scenario: User logs into James successfully    # features/loginTestCase.feature:11
+    Given James app is open and running          # features/steps/LoginSuccessSteps.py:17
+    When I enter my phone number "3022065094"    # features/steps/LoginSuccessSteps.py:24
+    And I tap "Continue" on enter phone screen   # features/steps/LoginSuccessSteps.py:30
+    Then I get the verification code from an SMS # features/steps/LoginSuccessSteps.py:37
+    And I enter the "code" on code screen        # features/steps/LoginSuccessSteps.py:44
+      Traceback (most recent call last):
+        File "/Users/darrencito/PycharmProjects/James_app/pythonProject/.venv/lib/python3.12/site-packages/behave/model.py", line 1329, in run
+          match.run(runner.context)
+        File "/Users/darrencito/PycharmProjects/James_app/pythonProject/.venv/lib/python3.12/site-packages/behave/matchers.py", line 98, in run
+          self.func(context, *args, **kwargs)
+        File "features/steps/LoginSuccessSteps.py", line 49, in enter_verification_code
+          code_validation_screen = LoginCodeValidationScreen(context.james_driver)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File "/Users/darrencito/james-test-automation/screens/LoginCodeValidationScreen.py", line 20, in __init__
+          self.pinCodeField = self.find_element(AppiumBy.ID, "com.hdw.james.rider:id/inputContainer")
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File "/Users/darrencito/james-test-automation/screens/BaseScreen.py", line 19, in find_element
+          return self.wait.until(
+                 ^^^^^^^^^^^^^^^^
+        File "/Users/darrencito/PycharmProjects/James_app/pythonProject/.venv/lib/python3.12/site-packages/selenium/webdriver/support/wait.py", line 105, in until
+          raise TimeoutException(message, screen, stacktrace)
+      selenium.common.exceptions.TimeoutException: Message: 
+      Stacktrace:
+      NoSuchElementError: An element could not be located on the page using the given search parameters.
+          at AndroidUiautomator2Driver.findElOrEls (/Users/darrencito/.appium/node_modules/appium-uiautomator2-driver/node_modules/appium-android-driver/lib/commands/find.ts:86:11)
+          at processTicksAndRejections (node:internal/process/task_queues:95:5)
+          at AndroidUiautomator2Driver.findElOrElsWithProcessing (/Users/darrencito/.nvm/versions/node/v20.11.1/lib/node_modules/appium/node_modules/@appium/base-driver/lib/basedriver/commands/find.ts:60:12)
+          at AndroidUiautomator2Driver.findElement (/Users/darrencito/.nvm/versions/node/v20.11.1/lib/node_modules/appium/node_modules/@appium/base-driver/lib/basedriver/commands/find.ts:75:12)
+      
+      Captured stdout:
+      Extracted James code: 333826
+      
+      Captured logging:
+      INFO:WDM:====== WebDriver manager ======
+      INFO:WDM:Get LATEST chromedriver version for google-chrome
+      INFO:WDM:Get LATEST chromedriver version for google-chrome
+      INFO:WDM:Driver [/Users/darrencito/.wdm/drivers/chromedriver/mac64/122.0.6261.94/chromedriver-mac-arm64/chromedriver] found in cache
+
+    When I tap "Continue" on code screen         # None
+    Then I am logged into James app              # None
+
+Feature: Edit user profile on James app # features/editProfileTestCase.feature:1
+
+  Scenario: Change user First Name                                     # features/editProfileTestCase.feature:3
+    Given James app is running with user already logged in             # features/steps/EditProfileTestSteps.py:14
+    Then I tap on main menu button                                     # features/steps/EditProfileTestSteps.py:21
+      Traceback (most recent call last):
+        File "/Users/darrencito/PycharmProjects/James_app/pythonProject/.venv/lib/python3.12/site-packages/behave/model.py", line 1329, in run
+          match.run(runner.context)
+        File "/Users/darrencito/PycharmProjects/James_app/pythonProject/.venv/lib/python3.12/site-packages/behave/matchers.py", line 98, in run
+          self.func(context, *args, **kwargs)
+        File "features/steps/EditProfileTestSteps.py", line 23, in open_main_menu
+          james_home_screen = JamesHomeScreen(context.james_driver)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File "/Users/darrencito/james-test-automation/screens/JamesHomeScreen.py", line 13, in __init__
+          self.menu_button = self.find_element(AppiumBy.ID, "com.hdw.james.rider:id/MAIN_MENU_ID")
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File "/Users/darrencito/james-test-automation/screens/BaseScreen.py", line 19, in find_element
+          return self.wait.until(
+                 ^^^^^^^^^^^^^^^^
+        File "/Users/darrencito/PycharmProjects/James_app/pythonProject/.venv/lib/python3.12/site-packages/selenium/webdriver/support/wait.py", line 105, in until
+          raise TimeoutException(message, screen, stacktrace)
+      selenium.common.exceptions.TimeoutException: Message: 
+      Stacktrace:
+      NoSuchElementError: An element could not be located on the page using the given search parameters.
+          at AndroidUiautomator2Driver.findElOrEls (/Users/darrencito/.appium/node_modules/appium-uiautomator2-driver/node_modules/appium-android-driver/lib/commands/find.ts:86:11)
+          at processTicksAndRejections (node:internal/process/task_queues:95:5)
+          at AndroidUiautomator2Driver.findElOrElsWithProcessing (/Users/darrencito/.nvm/versions/node/v20.11.1/lib/node_modules/appium/node_modules/@appium/base-driver/lib/basedriver/commands/find.ts:60:12)
+          at AndroidUiautomator2Driver.findElement (/Users/darrencito/.nvm/versions/node/v20.11.1/lib/node_modules/appium/node_modules/@appium/base-driver/lib/basedriver/commands/find.ts:75:12)
+
+    When I tap on the tile with users names                            # None
+    Then I am taken to the Profile screen                              # None
+    And I change users first name to "NewName22"                       # None
+    Then I tap Done button                                             # None
+    Then Success toast message is displayed                            # None
+    And Account screen shows new name "NewName22" on user profile tile # None
+
